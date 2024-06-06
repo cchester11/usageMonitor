@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>Hello World!</title>
-    <link rel="stylesheet" href="index.css" />
-  </head>
-  <body>
-    <h1>💖 Hello World!</h1>
-    <p>Welcome to your Electron application.</p>
-  </body>
+      <head>
+            <meta charset="UTF-8" />
+            <title>Usage Monitor</title>
+            <link rel="stylesheet" href="index.css" />
+      </head>
+      <body>
+            <div>
+                  <h1>Usage Monitor</h1>
+                  <div>CPU: <span id="usage"></span></div>
+            </div>
+            <script type="module" src="./renderer.mjs"></script>
+      </body>
 </html>

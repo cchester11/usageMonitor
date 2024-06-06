@@ -1,11 +1,13 @@
 {
+  "type": "module",
   "name": "usagemonitor",
   "productName": "usagemonitor",
   "version": "1.0.0",
   "description": "My Electron application description",
-  "main": "src/index.js",
+  "main": "src/index.mjs",
   "scripts": {
     "start": "electron-forge start",
+    "dev": "nodemon --watch . --exec 'electron .'",
     "package": "electron-forge package",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
