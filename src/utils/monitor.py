@@ -19,16 +19,29 @@ def get_disk_usage():
 		"percent": space.percent
       }
 
+def get_battery():
+	battery = psutil.sensors_battery()
+	return battery.percent if battery else None
+
+def get_user():
+	users = psutil.users()
+	return users[0].name if users else None
+      # return [user.name for user in users] if users else []
+
 def log_cpu_usage(file_path):
 	while True:
 		try:
 			cpu_usage = get_cpu_usage()
 			disk_usage = get_disk_usage()
+			battery_percent = get_battery()
+			user = get_user()
 			timestamp = time.time()
 			data = {
-				      "timestamp": timestamp, 
-	                        "cpu_usage": cpu_usage, 
-					"disk_usage": disk_usage
+				"timestamp": timestamp, 
+				"cpu_usage": cpu_usage, 
+				"disk_usage": disk_usage,
+				"battery_percent": battery_percent,
+				"user": user
 				}
 			
                   # write to the logs
