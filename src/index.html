@@ -1,19 +1,20 @@
 <!DOCTYPE html>
 <html>
-      <head>
-            <meta charset="UTF-8" />
-            <title>Usage Monitor</title>
-            <link rel="stylesheet" href="index.css" />
-      </head>
-      <body>
-            <div class="main">
-              <div class="theHeader">
-                <h1>Usage Monitor</h1>
-              </div>
-              <div class="cpu">
-                <h3>CPU: <span id="usage"></span></h3>
-              </div>
-            </div>
-            <script type="module" src="./renderer.mjs"></script>
-      </body>
+<head>
+      <meta charset="UTF-8" />
+      <title>Usage Monitor</title>
+      <link rel="stylesheet" href="index.css" />
+      <link rel="stylesheet" href="../dist/tailwind.css" />
+</head>
+<body class="h-screen w-screen bg-gray-100 text-center">
+      <div class="main h-full w-full flex-col justify-center items-center p-4 bg-slate-900">
+        <div class="theHeader w-full text-slate-300 p-2">
+          <h1 class="text-3xl font-lighter">Usage Monitor</h1>
+        </div>
+        <div class="cpu mt-4">
+          <h3 class="text-lg text-slate-300">CPU: <span id="usage"></span></h3>
+        </div>
+      </div>
+      <script type="module" src="./renderer.mjs"></script>
+</body>
 </html>
