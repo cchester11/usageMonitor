@@ -1,4 +1,26 @@
 window.addEventListener("DOMContentLoaded", () => {
+      const ctx = document.getElementById('myChart');
+      let cpuData = [];
+      
+      const chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                  labels: [],
+                  datasets: [{
+                        label: 'Usage',
+                        data: cpuData,
+                        borderWidth: 1
+                  }]
+            },
+            options: {
+                  scales: {
+                        y: {
+                              beginAtZero: true
+                        }
+                  }
+            }
+      });
+
       function formatBytes(bytes, decimals = 2) {
             if (!+bytes) return '0 Bytes'
 
@@ -14,11 +36,17 @@ window.addEventListener("DOMContentLoaded", () => {
       setInterval(async () => {
             try {
                   const logs = await window.myAPI.parseUsage();
-                  console.log(logs)
+                  
+                  let latestLogs = logs.slice(-5); // get last 5 logs
+                  cpuData = latestLogs.map(log => log.cpu_usage);
+                  chart.data.labels = latestLogs.map(log => log.timestamp);
+                  chart.data.datasets[0].data = cpuData;
+                  chart.update();
+
                   let getNext = logs[logs.length - 1];
                   let freeSpace = formatBytes(getNext.disk_usage.free);
                   let totalSpace = formatBytes(getNext.disk_usage.total);
-                  
+
                   document.querySelector('#usage').innerHTML = getNext.cpu_usage + "%";
                   document.querySelector("#total").innerHTML = totalSpace;
                   document.querySelector("#free").innerHTML = freeSpace;
@@ -29,6 +57,3 @@ window.addEventListener("DOMContentLoaded", () => {
             }
       }, 4000); // Adjust the interval as needed
 });
-
-console.log(window.myAPI)
-// => undefined

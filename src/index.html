@@ -16,8 +16,11 @@
         </div>
         <!--Monitors Container-->
         <div class="w-full h-full grid grid-cols-2 gap-4">
-          <div class="cpu mt-4">
+          <div class="cpu grid grid-cols-1 mt-4">
             <h3 class="text-2xl text-slate-300">CPU: <span id="usage"></span></h3>
+            <div class="flex justify-center items-center">
+              <canvas class="" id="myChart"></canvas>
+            </div>
           </div>
           <div class="disk mt-4">
             <h3 class="text-2xl text-slate-300">Total Disk Space: <span id="total"></span></h3>
@@ -32,6 +35,7 @@
         </div>
       </div>
       <!--Scripts-->
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
       <script type="module" src="./renderer.mjs"></script>
 </body>
 </html>

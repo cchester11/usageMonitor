@@ -558,6 +558,18 @@ video {
   margin-top: 1rem;
 }
 
+.mt-5 {
+  margin-top: 1.25rem;
+}
+
+.mb-5 {
+  margin-bottom: 1.25rem;
+}
+
+.flex {
+  display: flex;
+}
+
 .grid {
   display: grid;
 }
@@ -576,6 +588,10 @@ video {
 
 .w-screen {
   width: 100vw;
+}
+
+.grid-cols-1 {
+  grid-template-columns: repeat(1, minmax(0, 1fr));
 }
 
 .grid-cols-2 {
