@@ -6,15 +6,31 @@
       <link rel="stylesheet" href="index.css" />
       <link rel="stylesheet" href="../dist/tailwind.css" />
 </head>
+<!--Body-->
 <body class="h-screen w-screen bg-gray-100 text-center">
+      <!--Main container-->
       <div class="main h-full w-full flex-col justify-center items-center p-4 bg-slate-900">
+        <!--Header-->
         <div class="theHeader w-full text-slate-300 p-2">
           <h1 class="text-3xl font-lighter">Usage Monitor</h1>
         </div>
-        <div class="cpu mt-4">
-          <h3 class="text-lg text-slate-300">CPU: <span id="usage"></span></h3>
+        <!--Monitors Container-->
+        <div class="w-full h-full grid grid-cols-2 gap-4">
+          <div class="cpu mt-4">
+            <h3 class="text-2xl text-slate-300">CPU: <span id="usage"></span></h3>
+          </div>
+          <div class="disk mt-4">
+            <h3 class="text-2xl text-slate-300">Disk Space: </h3>
+          </div>
+          <div class="network mt-4">
+            <h3 class="text-2xl text-slate-300">Addresses: </h3>
+          </div>
+          <div class="user">
+            <h3 class="text-2xl text-slate-300">User: </h3>
+          </div>
         </div>
       </div>
+      <!--Scripts-->
       <script type="module" src="./renderer.mjs"></script>
 </body>
 </html>
