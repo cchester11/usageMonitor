@@ -1,10 +1,27 @@
 window.addEventListener("DOMContentLoaded", () => {
+      function formatBytes(bytes, decimals = 2) {
+            if (!+bytes) return '0 Bytes'
+
+            const k = 1024
+            const dm = decimals < 0 ? 0 : decimals
+            const sizes = ['Bytes', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB']
+
+            const i = Math.floor(Math.log(bytes) / Math.log(k))
+
+            return `${parseFloat((bytes / Math.pow(k, i)).toFixed(dm))} ${sizes[i]}`
+      }
+
       setInterval(async () => {
             try {
-                  const cpu = await window.myAPI.parseUsage();
-                  let getNextUsage = cpu[cpu.length - 1];
+                  const logs = await window.myAPI.parseUsage();
+                  console.log(logs)
+                  let getNext = logs[logs.length - 1];
+                  let space = formatBytes(getNext.disk_usage.free);
                   
-                  document.querySelector('#usage').innerHTML = getNextUsage.cpu_usage + "%";
+                  document.querySelector('#usage').innerHTML = getNext.cpu_usage + "%";
+                  document.querySelector("#space").innerHTML = space;
+                  document.querySelector("#battery").innerHTML = getNext.battery_percent + "%";
+                  document.querySelector("#user").innerHTML = getNext.user;
             } catch (err) {
                   console.error('Error fetching usage:', err);
             }
