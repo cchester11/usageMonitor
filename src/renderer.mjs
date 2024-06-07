@@ -1,13 +1,12 @@
 window.addEventListener("DOMContentLoaded", () => {
       const ctx = document.getElementById('myChart');
       let cpuData = [];
-      
+
       const chart = new Chart(ctx, {
             type: 'line',
             data: {
                   labels: [],
                   datasets: [{
-                        label: 'Usage',
                         data: cpuData,
                         borderWidth: 1
                   }]
@@ -15,7 +14,14 @@ window.addEventListener("DOMContentLoaded", () => {
             options: {
                   scales: {
                         y: {
+                              min: 0,
+                              max: 100,
                               beginAtZero: true
+                        }
+                  },
+                  plugins: {
+                        legend: {
+                              display: false
                         }
                   }
             }
@@ -36,7 +42,7 @@ window.addEventListener("DOMContentLoaded", () => {
       setInterval(async () => {
             try {
                   const logs = await window.myAPI.parseUsage();
-                  
+
                   let latestLogs = logs.slice(-5); // get last 5 logs
                   cpuData = latestLogs.map(log => log.cpu_usage);
                   chart.data.labels = latestLogs.map(log => log.timestamp);
