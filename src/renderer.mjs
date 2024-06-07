@@ -16,10 +16,12 @@ window.addEventListener("DOMContentLoaded", () => {
                   const logs = await window.myAPI.parseUsage();
                   console.log(logs)
                   let getNext = logs[logs.length - 1];
-                  let space = formatBytes(getNext.disk_usage.free);
+                  let freeSpace = formatBytes(getNext.disk_usage.free);
+                  let totalSpace = formatBytes(getNext.disk_usage.total);
                   
                   document.querySelector('#usage').innerHTML = getNext.cpu_usage + "%";
-                  document.querySelector("#space").innerHTML = space;
+                  document.querySelector("#total").innerHTML = totalSpace;
+                  document.querySelector("#free").innerHTML = freeSpace;
                   document.querySelector("#battery").innerHTML = getNext.battery_percent + "%";
                   document.querySelector("#user").innerHTML = getNext.user;
             } catch (err) {
