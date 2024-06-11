@@ -3,12 +3,25 @@ import path from 'path';
 import fs from 'fs';
 import { spawn } from 'child_process';
 import { fileURLToPath } from 'url';
+import { session } from 'electron';
 
 // equivalent of __dirname for ES module
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 let monitorProcess;
+
+
+const startSession = () => {
+  session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
+    callback({
+      responseHeaders: {
+        ...details.responseHeaders,
+        'Content-Security-Policy': ["default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' https://cdn.jsdelivr.net; img-src 'self' data:; font-src 'self' data:;"]
+      }
+    })
+  })
+}
 
 const createWindow = () => {
   // Create the browser window.
@@ -116,6 +129,7 @@ const stopMonitor = () => {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
+  startSession();
   createWindow();
   runMonitor();
 
