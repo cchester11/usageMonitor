@@ -6,6 +6,11 @@ import os
 # Define the path relative to the current file's directory
 log_path = os.path.join(os.path.dirname(__file__), '..', '..', 'logs', 'cpu_usage.txt')
 
+def get_current_time():
+	curr_time = time.localtime()
+	curr_clock = time.strftime("%H:%M:%S:", curr_time)
+	return curr_clock
+
 def get_cpu_usage():
 	usage = psutil.cpu_percent(interval=1)
 	return usage
@@ -35,7 +40,7 @@ def log_cpu_usage(file_path):
 			disk_usage = get_disk_usage()
 			battery_percent = get_battery()
 			user = get_user()
-			timestamp = time.time()
+			timestamp = get_current_time()
 			data = {
 				"timestamp": timestamp, 
 				"cpu_usage": cpu_usage, 
@@ -51,6 +56,7 @@ def log_cpu_usage(file_path):
                   # Sent to runMonitor stdout
 			print(f"Usage: {cpu_usage}")
 			print(f"Space: {disk_usage}")
+			print(f"Time: {timestamp}")
 
 			time.sleep(10) # Run every 10 seconds
 		except Exception as e:
