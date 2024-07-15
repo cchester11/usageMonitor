@@ -5,6 +5,40 @@
   "version": "1.0.0",
   "description": "My Electron application description",
   "main": "src/index.mjs",
+  "config": {
+    "forge": {
+      "packagerConfig": {
+        "icon": "assets/icons/icon"
+      },
+      "makers": [
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "iconUrl": "https://assets/icons/icon.ico",
+            "setupIcon": "assets/icons/icon.ico"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": [
+            "darwin"
+          ]
+        },
+        {
+          "name": "@electron-forge/maker-deb",
+          "config": {
+            "icon": "assets/icons/icon.png"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-rpm",
+          "config": {
+            "icon": "assets/icons/icon.png"
+          }
+        }
+      ]
+    }
+  },
   "scripts": {
     "start": "electron-forge start",
     "dev": "nodemon --watch . --exec 'electron .'",
