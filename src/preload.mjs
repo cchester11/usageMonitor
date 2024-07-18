@@ -1,25 +1,27 @@
-// See the Electron documentation for details on how to use preload scripts:
-// https://www.electronjs.org/docs/latest/tutorial/process-model#preload-scripts
 import path from 'path';
 import fs from 'fs';
+const { contextBridge, ipcRenderer } = require('electron');
 
-const { contextBridge } = require('electron');
+let appPath;
+
+ipcRenderer.on('app-path', (event, receivedAppPath) => {
+      appPath = receivedAppPath;
+});
 
 contextBridge.exposeInMainWorld('myAPI', {
       desktop: true,
       parseUsage: function parseUsage() {
-            // Calculate the correct path to cpu_usage.txt in the logs folder
-            let logPath = path.join(__dirname, '..', 'logs', 'cpu_usage.txt');
-      
+            let logPath = path.join(appPath, 'logs', 'cpu_usage.txt');
+
             console.log('parseUsage running')
-      
+
             return new Promise((resolve, reject) => {
                   fs.readFile(logPath, 'utf-8', (err, data) => {
                         if (err) {
                               console.error('Error reading log file: ' + err);
                               return reject(err);
                         }
-      
+
                         try {
                               let logs = data.split('\n')
                                     .filter(line => line.trim() !== '')

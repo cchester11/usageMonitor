@@ -43,7 +43,7 @@ window.addEventListener("DOMContentLoaded", () => {
             try {
                   const logs = await window.myAPI.parseUsage();
 
-                  let latestLogs = logs.slice(-5); // get last 5 logs
+                  let latestLogs = logs.slice(-5);
                   cpuData = latestLogs.map(log => log.cpu_usage);
                   chart.data.labels = latestLogs.map(log => log.timestamp);
                   chart.data.datasets[0].data = cpuData;
@@ -61,5 +61,5 @@ window.addEventListener("DOMContentLoaded", () => {
             } catch (err) {
                   console.error('Error fetching usage:', err);
             }
-      }, 4000); // Adjust the interval as needed
+      }, 4000);
 });
