@@ -2,9 +2,16 @@ import psutil
 import time
 import json
 import os
+import sys
 
-# Define the path relative to the current file's directory
-log_path = os.path.join(os.path.dirname(__file__), '..', '..', 'logs', 'cpu_usage.txt')
+# Determine log_path
+def resource_path(relative_path):
+	try:
+		base_path = sys._MEIPASS
+	except Exception:
+		base_path = os.path.abspath('.')
+
+	return os.path.join(base_path, relative_path)
 
 def get_current_time():
 	curr_time = time.localtime()
@@ -64,4 +71,5 @@ def log_cpu_usage(file_path):
 			time.sleep(5) # Wait 5 seconds before retrying
 
 if __name__ == "__main__":
+	log_path = resource_path('monitor')
 	log_cpu_usage(log_path)
