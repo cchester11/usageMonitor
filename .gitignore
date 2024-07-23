@@ -96,3 +96,7 @@ out/
 
 # python venv
 python/
+
+# pyinstaller build and dist directories
+build/monitor
+dist/monitor
