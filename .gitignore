@@ -98,5 +98,5 @@ out/
 python/
 
 # pyinstaller build and dist directories
-build/monitor
-dist/monitor
+src/utils/build/**
+src/utils/dist/**
