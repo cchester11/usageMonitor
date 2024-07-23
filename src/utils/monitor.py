@@ -9,13 +9,19 @@ def resource_path(relative_path):
 	try:
 		base_path = sys._MEIPASS
 	except Exception:
-		base_path = os.path.abspath('.')
+		base_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../'))
 
 	return os.path.join(base_path, relative_path)
 
+def ensure_logs_exist(log_path):
+	directory = os.path.dirname(log_path)
+	if not os.path.exists(directory):
+		os.makedirs(directory)
+
+
 def get_current_time():
 	curr_time = time.localtime()
-	curr_clock = time.strftime("%H:%M:%S:", curr_time)
+	curr_clock = time.strftime("%H:%M:%S", curr_time)
 	return curr_clock
 
 def get_cpu_usage():
@@ -41,6 +47,8 @@ def get_user():
       # return [user.name for user in users] if users else []
 
 def log_cpu_usage(file_path):
+	ensure_logs_exist(file_path)
+
 	while True:
 		try:
 			cpu_usage = get_cpu_usage()
@@ -71,5 +79,6 @@ def log_cpu_usage(file_path):
 			time.sleep(5) # Wait 5 seconds before retrying
 
 if __name__ == "__main__":
-	log_path = resource_path('monitor')
+	log_path = resource_path('logs/cpu_usage.txt')
+	print(log_path)
 	log_cpu_usage(log_path)
