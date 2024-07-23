@@ -79,6 +79,6 @@ def log_cpu_usage(file_path):
 			time.sleep(5) # Wait 5 seconds before retrying
 
 if __name__ == "__main__":
-	log_path = resource_path('usageMonitor/logs/cpu_usage.txt')
+	log_path = resource_path('logs/cpu_usage.txt')
 	print(f"Logging to: {log_path}")
 	log_cpu_usage(log_path)
