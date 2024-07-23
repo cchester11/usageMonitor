@@ -8,8 +8,8 @@ import sys
 def resource_path(relative_path):
 	try:
 		base_path = sys._MEIPASS
-	except Exception:
-		base_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../'))
+	except AttributeError:
+		base_path = os.path.abspath('.')
 
 	return os.path.join(base_path, relative_path)
 
@@ -79,6 +79,6 @@ def log_cpu_usage(file_path):
 			time.sleep(5) # Wait 5 seconds before retrying
 
 if __name__ == "__main__":
-	log_path = resource_path('logs/cpu_usage.txt')
-	print(log_path)
+	log_path = resource_path('usageMonitor/logs/cpu_usage.txt')
+	print(f"Logging to: {log_path}")
 	log_cpu_usage(log_path)
