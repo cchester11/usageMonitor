@@ -4,20 +4,8 @@ import json
 import os
 import sys
 
-# Determine log_path
-def resource_path(relative_path):
-	try:
-		base_path = sys._MEIPASS
-	except AttributeError:
-		base_path = os.path.abspath('.')
-
-	return os.path.join(base_path, relative_path)
-
-def ensure_logs_exist(log_path):
-	directory = os.path.dirname(log_path)
-	if not os.path.exists(directory):
-		os.makedirs(directory)
-
+# define path to logs directory
+log_path = os.path.join(os.path.dirname(__file__), '..', '..', 'logs', 'cpu_usage.txt')
 
 def get_current_time():
 	curr_time = time.localtime()
@@ -47,7 +35,6 @@ def get_user():
       # return [user.name for user in users] if users else []
 
 def log_cpu_usage(file_path):
-	ensure_logs_exist(file_path)
 
 	while True:
 		try:
@@ -79,6 +66,5 @@ def log_cpu_usage(file_path):
 			time.sleep(5) # Wait 5 seconds before retrying
 
 if __name__ == "__main__":
-	log_path = resource_path('logs/cpu_usage.txt')
 	print(f"Logging to: {log_path}")
 	log_cpu_usage(log_path)
