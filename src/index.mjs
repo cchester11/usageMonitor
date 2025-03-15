@@ -51,8 +51,8 @@ const runMonitor = () => {
       console.log(`Monitor Output: ${data}`);
     });
 
-    monitorProcess.stderr.on('error', (err) => {
-      console.error(`Monitor Error: ${err}`);
+    monitorProcess.stderr.on('data', (data) => {
+      console.error(`Monitor Error: ${data}`);
     });
 
     monitorProcess.on('close', (code) => {
