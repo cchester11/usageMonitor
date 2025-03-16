@@ -100,3 +100,7 @@ python/
 # pyinstaller build and dist directories
 src/utils/build/**
 src/utils/dist/**
+
+# python venv
+venv
+.venv

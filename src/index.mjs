@@ -45,7 +45,10 @@ const createWindow = () => {
 const runMonitor = () => {
   try {
     const monitorScript = path.join(app.getAppPath(), 'src', 'utils', 'monitor.py');
-    monitorProcess = spawn('python3', ['-u', monitorScript]);
+    const pythonPath = path.join(app.getAppPath(), '.venv', 'bin', 'python3');
+    console.log(pythonPath);
+
+    monitorProcess = spawn(pythonPath, ['-u', monitorScript]);
 
     monitorProcess.stdout.on('data', (data) => {
       console.log(`Monitor Output: ${data}`);
