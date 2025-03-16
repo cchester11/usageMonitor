@@ -4,7 +4,7 @@ This is a simple system monitor app.
 
 There are more features coming in the future.
 
-<img src="./assets/screenshot.jpg" width="1500" height="900">
+<img src="./assets/screenshot.jpg">
 
 ## Built With
 
