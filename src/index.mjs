@@ -44,21 +44,23 @@ const createWindow = () => {
 
 const runMonitor = () => {
   try {
-    // let venvPath = path.join(app.getAppPath(), '.venv');
+    let venvPath = path.join(app.getAppPath(), '.venv');
 
     const monitorScript = path.join(app.getAppPath(), 'src', 'utils', 'monitor.py');
     const pythonPath = path.join(app.getAppPath(), '.venv', 'bin', 'python3');
     console.log(pythonPath);
 
-    // function activateVenv () {
-    //   let command = () => {
-    //     return `source ${venvPath}/bin/activate`
-    //   }
+    //if venv has not been created, create a venv
+    
+    function activateVenv () {
+      let command = () => {
+        return `source ${venvPath}/bin/activate`
+      }
 
-    //   command();
-    // };
+      command();
+    };
 
-    // activateVenv();
+    activateVenv();
 
     monitorProcess = spawn(pythonPath, ['-u', monitorScript]);
 
