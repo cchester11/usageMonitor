@@ -42,13 +42,62 @@ const createWindow = () => {
   });
 };
 
+// // create venv if does not exist
+// const createVenv = async () => {
+//   try {
+//     // path to venv if venv exists
+//     const venvPath = path.join(process.cwd(), '..', '.venv');
+
+//     // check to see if venv exists
+//     if (fs.existsSync(venvPath)) {
+//       return;
+//     }
+
+//     // if it doesn't, use run command to create venv and install psutil
+//     console.log('creating venv...')
+//     await runCommand('uv venv');
+//     console.log('installing psutil...')
+//     await runCommand('source .venv/bin/activate && uv pip install psutil');
+//   } catch (error) {
+//     console.error(error)
+//   };
+// };
+
+
+// // define a runCommand function that can accept a command
+// const runCommand = (comnd) => {
+//   return new Promise((resolve, reject) => {
+//     // spawn process that runs command
+//     let prcs = spawn(comnd, { shell: true });
+
+//     // log process output
+//     prcs.stdout.on('data', (data) => {
+//       console.log(`stdout: ${data}`)
+//     })
+
+//     prcs.stderr.on('data', (data) => {
+//       console.log(`stderr: ${data}`)
+//     })
+
+//     prcs.on('close', (code) => {
+//       console.log(`Child process exited with code: ${code}`)
+
+//       if(code === 0) {
+//         resolve(true);
+//       } else {
+//         reject(new Error(`command failed with exit code: ${code}`))
+//       }
+//     })
+//   });
+// };
+
+// createVenv();
+
 const runMonitor = () => {
   try {
     const monitorScript = path.join(app.getAppPath(), 'src', 'utils', 'monitor.py');
     const pythonPath = path.join(app.getAppPath(), '.venv', 'bin', 'python3');
     console.log(pythonPath);
-
-    // create venv if one does not exist at root
 
     monitorProcess = spawn(pythonPath, ['-u', monitorScript]);
 
